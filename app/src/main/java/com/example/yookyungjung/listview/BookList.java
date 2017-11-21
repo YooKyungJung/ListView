@@ -14,35 +14,35 @@ import java.util.ArrayList;
  * Created by YookyungJung on 2017-11-21.
  */
 
-public class FriendsList extends Activity implements View.OnClickListener{
-    private ArrayList<FriendsItem> data=null;
+public class BookList extends Activity implements View.OnClickListener{
+    private ArrayList<BookItem> data=null;
     @SuppressLint("MissingSuperCall")
     @Override
     protected void onCreate(Bundle savedInstanceState)  {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.friends_list);
-        ListView listView=(ListView)findViewById(R.id.friends_listview);
+        setContentView(R.layout.book_list);
+        ListView listView=(ListView)findViewById(R.id.book_listview);
 
         data=new ArrayList<>();
 
-        FriendsItem friends1=new FriendsItem(R.drawable.profile, "정유경 여 유갱","010-6527-5365");
-        FriendsItem friends2=new FriendsItem(R.drawable.profile, "유지수 여 슈","010-0000-0000");
-        FriendsItem friends3=new FriendsItem(R.drawable.profile, "전하영 여 하용이","010-0000-0000");
+        BookItem b1=new BookItem(R.drawable.profile, "나미야 잡화점의 기적","히가시노 게이고 저/양운옥 역","출판사1");
+        BookItem b2=new BookItem(R.drawable.profile, "공허한 십자가","히가시노게이고 저/이선화역","모르겠는데요");
 
-        data.add(friends1);
-        data.add(friends2);
-        data.add(friends3);
+        data.add(b1);
+        data.add(b2);
 
-        FriendsAdapter adapter=new FriendsAdapter(this, R.layout.friends_item, data);
+        BookAdapter adapter=new BookAdapter(this, R.layout.book_item, data);
         listView.setAdapter(adapter);
 
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent=new Intent(getApplicationContext(), FriendsClicked.class);
+                Intent intent=new Intent(getApplicationContext(), BookClicked.class);
                 intent.putExtra("profile", Integer.toString(data.get(position).getProfile()));
-                intent.putExtra("info", data.get(position).getInfo());
-                intent.putExtra("phone", data.get(position).getPhone());
+                intent.putExtra("BookName", data.get(position).getBookName());
+                intent.putExtra("writer", data.get(position).getWriter());
+                intent.putExtra("publisher", data.get(position).getPublisher());
+
                 startActivity(intent);
             }
         });

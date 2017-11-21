@@ -14,12 +14,12 @@ import java.util.ArrayList;
  * Created by YookyungJung on 2017-11-21.
  */
 
-public class FriendsAdapter extends BaseAdapter {
+public class BookAdapter extends BaseAdapter {
     private LayoutInflater inflater;
-    private ArrayList<FriendsItem> data;
+    private ArrayList<BookItem> data;
     private int layout;
 
-    public FriendsAdapter(Context context, int layout, ArrayList<FriendsItem> data) {
+    public BookAdapter(Context context, int layout, ArrayList<BookItem> data) {
         this.inflater=(LayoutInflater)context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         this.data=data;
         this.layout=layout;
@@ -31,7 +31,7 @@ public class FriendsAdapter extends BaseAdapter {
 
     @Override
     public Object getItem(int position) {
-        return data.get(position).getInfo();
+        return data.get(position).getBookName();
     }
 
     @Override
@@ -44,16 +44,19 @@ public class FriendsAdapter extends BaseAdapter {
         if(convertView==null) {
             convertView=inflater.inflate(layout, parent, false);
         }
-        FriendsItem friendsItem=data.get(position);
+        BookItem bookItem =data.get(position);
 
         ImageView profile=(ImageView) convertView.findViewById(R.id.profile);
-        profile.setImageResource(friendsItem.getProfile());
+        profile.setImageResource(bookItem.getProfile());
 
-        TextView info=(TextView)convertView.findViewById(R.id.info);
-        info.setText(friendsItem.getInfo());
+        TextView bookName=(TextView)convertView.findViewById(R.id.bookName);
+        bookName.setText(bookItem.getBookName());
 
-        TextView phone=(TextView)convertView.findViewById(R.id.phone);
-        phone.setText(friendsItem.getPhone());
+        TextView writer=(TextView)convertView.findViewById(R.id.writer);
+        writer.setText(bookItem.getWriter());
+
+        TextView publisher=(TextView)convertView.findViewById(R.id.publisher);
+        publisher.setText(bookItem.getPublisher());
 
         return convertView;
     }
